@@ -25,7 +25,7 @@ function Signup() {
     const passwordRegexLowercase = /[a-z]/;
     const passwordRegexUppercase = /[A-Z]/;
     const passwordRegexDigit = /[0-9]/;
-    const passwordRegexSymbol = /[!@#$%^&*.]/;
+    const passwordRegexSymbol = /[!@#$%^&*.+-]/;
 
     const isPasswordValid = (
       password.match(passwordRegexLowercase) &&
