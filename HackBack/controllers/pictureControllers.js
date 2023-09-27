@@ -20,24 +20,28 @@ exports.findPictureById = (req, res) => {
       where: { id: req.params.id },
     })
     .then((result) => {
-      const pictures = result.map((picture) => {
-        return {
-          id: picture.id,
-          link: picture.link,
-          descriptions: picture.descriptions,
-          vote: picture.numberOfVotes,
-          status: picture.status,
-        };
-      });
+      if (!result) {
+        return res
+          .status(404)
+          .json({ message: "Aucune image trouvée avec cet ID." });
+      }
+      const picture = {
+        id: result.id,
+        link: result.link,
+        description: result.description,
+        vote: result.numberOfVotes,
+        status: result.status,
+      };
       res.json({
         message: "La photo a bien été récupérée.",
-        data: pictures,
+        data: picture,
       });
     })
     .catch((error) => {
       res.status(500).json({ message: error });
     });
 };
+
 exports.topFivePicture = (req, res) => {
   pictureModel
     .findAll({})

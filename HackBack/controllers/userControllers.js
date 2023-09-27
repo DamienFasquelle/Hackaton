@@ -1,5 +1,5 @@
 const { UniqueConstraintError, ValidationError } = require("sequelize");
-const { userModel } = require("../Db/sequelize");
+const { userModel, pictureModel } = require("../Db/sequelize");
 const bcrypt = require("bcrypt");
 
 exports.findAllUsers = (req, res) => {
