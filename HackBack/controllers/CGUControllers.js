@@ -13,6 +13,7 @@ exports.findCGU = (req, res) => {
     });
 };
 exports.createCGU = (req, res) => {
+  console.log(req.body);
   CGUModel.findOne({})
     .then(() => {
       return CGUModel.create({

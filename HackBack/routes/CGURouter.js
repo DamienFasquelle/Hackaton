@@ -4,17 +4,18 @@ const CGUControllers = require("../controllers/CGUControllers");
 const authControllers = require("../controllers/authControllers");
 
 router
-  .route("/CGU")
+  .route("/")
   .get(
     authControllers.protect,
     authControllers.restrictToAdmin,
     CGUControllers.findCGU
   )
-  .post(
-    authControllers.protect,
-    authControllers.restrictToAdmin,
-    CGUControllers.createCGU
-  )
+  // .post(
+  //   authControllers.protect,
+  //   authControllers.restrictToAdmin,
+  //   CGUControllers.createCGU
+  // )
+  .post(CGUControllers.createCGU)
   .delete(
     authControllers.protect,
     authControllers.restrictToAdmin,
