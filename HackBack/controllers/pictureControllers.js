@@ -102,25 +102,25 @@ exports.createPicture = async (req, res) => {
   }
 };
 
-// exports.updatePicture = (req, res) => {
-//   pictureModel
-//     .findByPk(req.params.id)
-//     .then((result) => {
-//       if (!result) {
-//         res.status(404).json({ message: "Aucune image trouvée" });
-//       } else {
-//         return result.update(req.body).then(() => {
-//           res.json({
-//             message: `Image modifié : ${result.dataValues.id} `,
-//             data: result,
-//           });
-//         });
-//       }
-//     })
-//     .catch((error) => {
-//       if (error instanceof ValidationError) {
-//         return res.status(400).json({ message: error.message });
-//       }
-//       res.status(500).json({ message: error.message });
-//     });
-// };
+exports.updatePicture = (req, res) => {
+  pictureModel
+    .findByPk(req.params.id)
+    .then((result) => {
+      if (!result) {
+        res.status(404).json({ message: "Aucune image trouvée" });
+      } else {
+        return result.update(req.body).then(() => {
+          res.json({
+            message: `Image modifié : ${result.dataValues.id} `,
+            data: result,
+          });
+        });
+      }
+    })
+    .catch((error) => {
+      if (error instanceof ValidationError) {
+        return res.status(400).json({ message: error.message });
+      }
+      res.status(500).json({ message: error.message });
+    });
+};

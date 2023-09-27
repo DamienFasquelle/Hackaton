@@ -37,8 +37,8 @@ const UserUploadForm = () => {
 
       if (responseCreate.status === 201) {
         Swal.fire({
-          title: 'Upload',
-          text: 'Upload réussite',
+          title: 'Téléchargée',
+          text: 'Téléchargement réussie',
           icon: 'success',
         })
         setTimeout(() => {

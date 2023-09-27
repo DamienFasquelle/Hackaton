@@ -9,6 +9,7 @@ import UserUpload from "./page/user/UserUpload";
 import UserUpdate from "./page/user/UserUpdate";
 import UserPhotos from "./page/user/UserPhotos";
 import AdminUpdateCGU from "./page/admin/AdminUpdateCGU";
+import AdminValidatePhoto from "./page/admin/AdminValidatePhoto";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/inscription" element={<Signup />} />
         {/* ADMIN */}
         <Route path="/admin/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/admin-validate" element={<AdminValidatePhoto />} />
         <Route path="/admin/admin-updatecgu" element={<AdminUpdateCGU />} />
         {/* USER */}
         <Route path="/user/user-upload" element={<UserUpload />} />

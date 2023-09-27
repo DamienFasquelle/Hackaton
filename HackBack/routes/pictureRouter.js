@@ -23,11 +23,7 @@ router
   //   authControllers.restrictToOwnUser(pictureModel),
   //   pictureControllers.deletePicture
   // )
-  .get(pictureControllers.findPictureById);
-// .put(
-//   authControllers.protect,
-//   authControllers.restrictToOwnUser(pictureModel),
-//   pictureControllers.updatePicture
-// );
+  .get(pictureControllers.findPictureById)
+  .put(pictureControllers.updatePicture);
 
 module.exports = router;
