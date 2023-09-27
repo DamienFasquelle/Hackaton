@@ -1,7 +1,6 @@
 import Footer from "../../components/public/Footer";
 import Header from "../../components/public/Header";
 import { Link } from "react-router-dom";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 function Signup() {
@@ -24,27 +23,20 @@ function Signup() {
     })
 
     if (signinUserResponse.status === 201) {
-      const signupData = await signinUserResponse.json();
-
-      const jwt = signupData.data;
-      Cookies.set("jwt", jwt);
-
-      if (signinUserResponse.status === 201) {
-        Swal.fire({
-          title: 'Inscription',
-          text: 'Inscription réussite, bienvenue',
-          icon: 'success',
-        })
-        setTimeout(() => {
-          navigate("/connexion")
-        }, 3000);
-      } else {
-        Swal.fire({
-          title: 'Erreur!',
-          text: 'Une erreur est survenue lors de votre inscription',
-          icon: 'error',
-        });
-      }
+      Swal.fire({
+        title: 'Inscription',
+        text: 'Inscription réussite, bienvenue',
+        icon: 'success',
+      })
+      setTimeout(() => {
+        navigate("/connexion")
+      }, 3000);
+    } else {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Une erreur est survenue lors de votre inscription',
+        icon: 'error',
+      });
     }
   };
 

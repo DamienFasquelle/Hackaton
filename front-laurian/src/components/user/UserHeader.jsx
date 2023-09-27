@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 function UserHeader() {
+  const navigate = useNavigate();
+
+  const handleClickDeleteCookies = () => {
+    Cookies.remove("jwt");
+    navigate("/connexion");
+  };
+
+  const jwt = Cookies.get("jwt");
+  const userData = jwtDecode(jwt);
   return (
     <>
       <header className="dashboard-header flex-between">
@@ -12,7 +24,7 @@ function UserHeader() {
         <nav>
           <ul className="flex-between dashboard-nav">
             <li>
-              <Link>
+              <Link to={`/user/user-upload`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -25,7 +37,7 @@ function UserHeader() {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to={`/user/user-photos`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -38,7 +50,7 @@ function UserHeader() {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to={`/user/user-update`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -52,7 +64,7 @@ function UserHeader() {
             </li>
           </ul>
         </nav>
-        <button className="logout-btn btn">
+        <button className="logout-btn btn" onClick={handleClickDeleteCookies}>
           <p>Déconnexion</p>
         </button>
       </header>

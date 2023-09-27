@@ -1,67 +1,85 @@
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
-import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const UserUploadForm = () => {
-  const navigate = useNavigate();
-  //   const token = Cookies.get("jwt");
 
-  const handleUploadPicture = async (event) => {
-    event.preventDefault();
+  const navigate = useNavigate()
 
-    const fileData = {
-      description: event.target.description.value,
-    };
+  const token = Cookies.get("jwt");
+  const [image, setImage] = useState(null);
+  const [description, setDescription] = useState("");
 
-    const formData = new FormData();
-
-    formData.append("file", event.target.file.files[0]);
-    formData.append("data", JSON.stringify(fileData));
-
-    // const token = Cookies.get("jwt");
-
-    const responseCreate = await fetch(
-      "http://localhost:3000/myPhotos/picture",
-      {
-        method: "POST",
-        body: formData,
-        headers: {
-          // "Content-Type": "application/json",
-          //   Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const responseCreateJs = await responseCreate.json();
-
-    console.log(responseCreate);
-
-    // if (responseCreate.status === 201) {
-    //   navigate("/user/user-photos");
-    // }
+  const handleImageChange = (event) => {
+    const selectedImage = event.target.files[0];
+    setImage(selectedImage);
   };
 
-  useEffect(() => {
-    // if (!Cookies.get("jwt")) {
-    //   navigate("/login");
-    // }
-  }, []);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("description", description);
+
+    try {
+      const responseCreate = await fetch(
+        "http://localhost:3000/api/picture",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (responseCreate.status === 201) {
+        Swal.fire({
+          title: 'Upload',
+          text: 'Upload réussite',
+          icon: 'success',
+        })
+        setTimeout(() => {
+          navigate("/user/user-photos")
+        }, 3000);
+      } else {
+        Swal.fire({
+          title: 'Erreur!',
+          text: 'Une erreur est survenue lors du téléchargement, contenue déjà présent',
+          icon: 'error',
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Erreur serveur, veuillez réessayer plus tard',
+        icon: 'error',
+      });
+    }
+  };
 
   return (
-    <form className="upload-form blur" onSubmit={handleUploadPicture}>
+    <form className="upload-form blur" onSubmit={handleSubmit}>
       <h3>Uploader une photo</h3>
       <div className="upload-input flex">
         <input
           type="file"
           id="file"
           name="file"
-          //   accept="image/png, image/jpeg"
+          onChange={handleImageChange}
+          accept="image/*"
         />
       </div>
       <div>
         <label htmlFor="description">Description</label>
-        <input type="text" name="description" />
+        <input
+          type="text"
+          name="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </div>
       <input type="submit" className="submit-btn" />
     </form>
