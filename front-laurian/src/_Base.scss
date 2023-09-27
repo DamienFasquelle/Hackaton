@@ -1,0 +1,150 @@
+// Colors
+
+$grey: rgb(42, 42, 42);
+$lightgrey: rgb(226, 226, 226);
+$green: rgb(0, 121, 91);
+
+// FONTS
+
+@font-face {
+  font-family: "Aboreto";
+  src: url(./fonts/Aboreto-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat Regular";
+  src: url(./fonts/Montserrat-Regular.otf);
+}
+@font-face {
+  font-family: "Montserrat Light";
+  src: url(./fonts/Montserrat-Light.otf);
+}
+@font-face {
+  font-family: "Montserrat ExtraLight";
+  src: url(./fonts/Montserrat-ExtraLight.otf);
+}
+@font-face {
+  font-family: "Montserrat Bold";
+  src: url(./fonts/Montserrat-Bold.otf);
+}
+
+//
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: "Montserrat Light";
+}
+
+html {
+  --scroll-behavior: smooth;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: $grey;
+}
+
+a {
+  color: $grey;
+}
+
+.bold {
+  font-family: "Montserrat Bold";
+}
+
+// FLEX
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.flex-column-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+// UNDERLINE
+
+.underline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    background-color: $green;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.2s ease-in-out;
+  }
+
+  &:hover::after {
+    width: 75%;
+  }
+}
+
+// CONTAINER
+
+.main-container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.homepage-section {
+  margin-bottom: 10vh;
+}
+
+// TITLES
+
+h2 {
+  font-family: "Aboreto";
+  display: inline-block;
+  position: relative;
+  background-color: white;
+  z-index: 10;
+  padding: 0 20px;
+  margin-bottom: 6vh;
+}
+
+// FORM
+
+form {
+  margin-top: 10vh;
+  padding: 20px 40px;
+  border: 1px solid $lightgrey;
+  border-radius: 10px;
+  gap: 20px;
+
+  input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid $lightgrey;
+  }
+
+  .submit-btn {
+    font-size: 1rem;
+    color: white;
+    background-color: $green;
+  }
+}

@@ -1,0 +1,38 @@
+.dashboard-header {
+  padding: 15px;
+  background-color: $lightgrey;
+
+  .homepage-link {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: $green;
+  }
+
+  .dashboard-nav {
+    gap: 10vw;
+    text-align: center;
+
+    li {
+      svg {
+        height: 30px;
+        width: auto;
+        transition: all 0.2s ease-in-out;
+      }
+
+      p {
+        font-size: 0.7rem;
+      }
+
+      &:hover {
+        a {
+          color: $green;
+        }
+
+        svg {
+          transform: rotate(-5deg);
+          fill: $green;
+        }
+      }
+    }
+  }
+}

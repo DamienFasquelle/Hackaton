@@ -1,0 +1,57 @@
+.bg-signup {
+  height: 80vh;
+  background: linear-gradient(
+      rgb(255, 255, 255) 10%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0) 92%,
+      rgb(255, 255, 255) 100%
+    ),
+    url(../../../public/images/bg_signup.jpg);
+  background-size: cover;
+  background-position: 0% 50%;
+
+  .signup-section {
+    margin: 4vh auto 0;
+    position: relative;
+
+    &::after {
+      content: "";
+      height: 1px;
+      width: 1200px;
+      background-color: $lightgrey;
+      position: absolute;
+      left: 0;
+      top: 12px;
+      z-index: 1;
+    }
+
+    .signup-form {
+      margin: 5vh 0;
+      background-color: white;
+
+      #email-input {
+        min-width: 250px;
+      }
+
+      #checkbox-cgu {
+        margin-right: 10px;
+      }
+
+      & > :first-child {
+        gap: 10px;
+      }
+
+      a {
+        color: $green;
+        font-family: "Montserrat Regular";
+      }
+    }
+
+    .login-redirection {
+      text-align: center;
+      & > :first-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

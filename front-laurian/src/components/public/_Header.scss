@@ -1,0 +1,33 @@
+.main-header {
+  color: $grey;
+  padding: 20px 10px;
+
+  .title-wrap {
+    gap: 5px;
+
+    & > :first-child {
+      font-family: "Aboreto";
+    }
+  }
+
+  .header-logo {
+    height: 30px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  .main-nav {
+    ul {
+      gap: 100px;
+      li {
+        font-family: "Montserrat Regular";
+        cursor: pointer;
+        color: $grey;
+
+        &:hover {
+          color: $green;
+        }
+      }
+    }
+  }
+}

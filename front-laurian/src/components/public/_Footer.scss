@@ -1,0 +1,12 @@
+.main-footer {
+  color: $grey;
+  .main-container {
+    border-top: 1px solid $grey;
+    padding: 20px 0;
+    text-align: center;
+
+    a {
+      color: $green;
+    }
+  }
+}

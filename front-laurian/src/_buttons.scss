@@ -1,0 +1,17 @@
+.btn {
+  background-color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.btn-alt {
+  background-color: $green;
+  color: white;
+}

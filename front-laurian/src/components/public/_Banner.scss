@@ -1,0 +1,72 @@
+.banner-section {
+  text-align: center;
+
+  & > :first-child {
+    height: 82vh;
+    text-align: left;
+  }
+
+  .scroll-indicator {
+    height: 30px;
+    margin-bottom: 8vh;
+    animation: move 5s ease-in-out infinite;
+  }
+
+  @keyframes move {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(20px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
+  }
+
+  .title {
+    width: 500px;
+    z-index: 10;
+
+    h1 {
+      font-family: "Aboreto";
+      font-size: 3rem;
+      display: inline-block;
+
+      span {
+        font-family: "Aboreto";
+        font-size: 7.5rem;
+      }
+    }
+
+    p {
+      font-family: "Montserrat ExtraLight";
+      font-size: 2rem;
+      text-align: end;
+    }
+
+    > h1 + div {
+      margin-left: calc(100% - 120px);
+      gap: 5px;
+
+      p {
+        font-size: 1rem;
+      }
+      img {
+        width: 120px;
+        height: auto;
+      }
+    }
+  }
+
+  .img-container {
+    height: 65vh;
+    width: auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  }
+}
