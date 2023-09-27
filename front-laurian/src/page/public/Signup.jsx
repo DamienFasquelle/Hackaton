@@ -1,10 +1,18 @@
+import { useState } from "react";
 import Footer from "../../components/public/Footer";
 import Header from "../../components/public/Header";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 function Signup() {
+
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
 
   const HandleSignupSubmit = async (event) => {
     event.preventDefault();
@@ -14,6 +22,27 @@ function Signup() {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
+    const passwordRegexLowercase = /[a-z]/;
+    const passwordRegexUppercase = /[A-Z]/;
+    const passwordRegexDigit = /[0-9]/;
+    const passwordRegexSymbol = /[!@#$%^&*.]/;
+
+    const isPasswordValid = (
+      password.match(passwordRegexLowercase) &&
+      password.match(passwordRegexUppercase) &&
+      password.match(passwordRegexDigit) &&
+      password.match(passwordRegexSymbol) &&
+      password.length >= 8
+    );
+
+    if (!isPasswordValid) {
+      Swal.fire({
+        title: 'Erreur!',
+        text: 'Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un symbole et doit avoir une longueur minimale de 8 caractères.',
+        icon: 'error',
+      });
+      return;
+    }
     const signinUserResponse = await fetch("http://localhost:3000/api/signin", {
       method: 'POST',
       body: JSON.stringify({ name, lastname, email, password }),
@@ -74,9 +103,20 @@ function Signup() {
               <label htmlFor="password">
                 Mot de passe<span>*</span>
               </label>
-              <input type="password" name="password" required />
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                required
+              />
             </div>
             <div className="form-element flex-between">
+              <button
+                className="btn btn-alt"
+                type="button"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? "Cacher" : "Afficher"} le mot de passe
+              </button>
               <input
                 id="checkbox-cgu"
                 type="checkbox"
