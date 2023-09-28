@@ -16,15 +16,16 @@ function UserHeader() {
   return (
     <>
       <header className="dashboard-header flex-between">
-        <div>
+        <div className="welcome">
           <p>
-            Bienvenue <span>{`${"..."}`}</span>
+            Bienvenue
+            {/* <span>{`${"userData.data.name"}`}</span> */}
           </p>
         </div>
         <nav>
           <ul className="flex-between dashboard-nav">
             <li>
-              <Link to={`/user/user-upload`}>
+              <Link>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -37,20 +38,20 @@ function UserHeader() {
               </Link>
             </li>
             <li>
-              <Link to={`/user/user-photos`}>
+              <Link>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
                   viewBox="0 -960 960 960"
                   width="24"
                 >
-                  <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm40-80h480L570-480 450-320l-90-120-120 160Zm-40 80v-560 560Zm140-360q25 0 42.5-17.5T400-620q0-25-17.5-42.5T340-680q-25 0-42.5 17.5T280-620q0 25 17.5 42.5T340-560Z" />
+                  <path d="M513-200h226v12q0 17-11.5 29.5T699-144L189-80q-17 2-29.5-7.5T145-114L81-632q-2-17 7.5-29.5T115-676l86-10v80l-36 4 54 438 294-36Zm68-200q68 0 115.5-47T749-560q-68 0-116.5 47T581-400ZM321-280q-17 0-28.5-11.5T281-320v-520q0-17 11.5-28.5T321-880h520q17 0 28.5 11.5T881-840v520q0 17-11.5 28.5T841-280H321Zm260-120q-3-66-51.5-113T413-560q5 66 52.5 113T581-400Zm0-120q17 0 28.5-11.5T621-560v-10l10 4q15 6 30.5 3t23.5-17q9-15 6-32t-20-24l-10-4 10-4q17-7 19.5-24.5T685-700q-9-15-24-17.5t-30 3.5l-10 4v-10q0-17-11.5-28.5T581-760q-17 0-28.5 11.5T541-720v10l-10-4q-15-6-30-3.5T477-700q-8 14-5.5 31.5T491-644l10 4-10 4q-17 7-20 24t6 32q8 14 23.5 17t30.5-3l10-4v10q0 17 11.5 28.5T581-520Zm0-80q-17 0-28.5-11.5T541-640q0-17 11.5-28.5T581-680q17 0 28.5 11.5T621-640q0 17-11.5 28.5T581-600ZM361-360h440v-440H361v440ZM219-164Zm142-196v-440 440Z" />
                 </svg>
                 <p>Mes photos</p>
               </Link>
             </li>
             <li>
-              <Link to={`/user/user-update`}>
+              <Link>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"

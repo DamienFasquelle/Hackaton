@@ -4,7 +4,7 @@ function UserFooter() {
   return (
     <>
       <footer className="dashboard-footer">
-        <Link to="/">
+        <Link to="/" target="_blank">
           <p className="homepage-link underline">
             {" "}
             {"<"} Retourner sur le site

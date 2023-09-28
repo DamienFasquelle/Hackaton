@@ -1,0 +1,67 @@
+.bg-upload {
+  min-height: 85vh;
+  background: linear-gradient(
+      rgb(255, 255, 255) 10%,
+      rgba(255, 255, 255, 0.621) 40%,
+      rgb(255, 255, 255) 100%
+    ),
+    url(../../../public/images/bg_upload.jpg);
+  background-size: cover;
+  background-position: 0% 40%;
+  overflow: hidden;
+
+  .upload-section {
+    margin: 4vh auto 0;
+    position: relative;
+
+    &::after {
+      content: "";
+      height: 1px;
+      width: 1200px;
+      background-color: $lightgrey;
+      position: absolute;
+      left: 0;
+      top: 12px;
+      z-index: 1;
+    }
+
+    .upload-form {
+      margin-bottom: 5vh;
+      background-color: white;
+
+      input,
+      textarea {
+        width: 400px;
+        margin-top: 10px;
+      }
+
+      #file {
+        border: none;
+      }
+
+      input {
+        &::file-selector-button {
+          padding: 15px 25px;
+          font-size: 1rem;
+          border-radius: 5px;
+          border: none;
+          display: inline-block;
+          margin-right: 20px;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+
+    .signup-redirection {
+      text-align: center;
+      & > :first-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

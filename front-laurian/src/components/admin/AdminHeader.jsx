@@ -16,7 +16,7 @@ function AdminHeader() {
   return (
     <>
       <header className="dashboard-header flex-between">
-        <div>
+        <div className="welcome">
           <p>
             Bienvenue
             {/* <span>{`${}`}</span> */}

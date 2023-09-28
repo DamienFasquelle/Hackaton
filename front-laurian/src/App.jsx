@@ -9,7 +9,7 @@ import UserUpload from "./page/user/UserUpload";
 import UserUpdate from "./page/user/UserUpdate";
 import UserPhotos from "./page/user/UserPhotos";
 import AdminUpdateCGU from "./page/admin/AdminUpdateCGU";
-import AdminValidatePhoto from "./page/admin/AdminValidatePhoto";
+import AdminValidatePhoto from "./page/admin/AdminValidate";
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 .dashboard-header {
   padding: 15px;
-  background-color: $lightgrey;
+  background: linear-gradient($lightgrey, rgb(247, 247, 247));
 
   .homepage-link {
     margin-top: 10px;
@@ -32,6 +32,19 @@
           transform: rotate(-5deg);
           fill: $green;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .welcome {
+    display: none;
+  }
+  .dashboard-nav {
+    li {
+      p {
+        display: none;
       }
     }
   }

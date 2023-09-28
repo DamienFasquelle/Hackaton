@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 const UserUploadForm = () => {
-
-  const navigate = useNavigate()
-
   const token = Cookies.get("jwt");
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState("");
@@ -24,65 +19,61 @@ const UserUploadForm = () => {
     formData.append("description", description);
 
     try {
-      const responseCreate = await fetch(
-        "http://localhost:3000/api/picture",
-        {
-          method: "POST",
-          body: formData,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const responseCreate = await fetch("http://localhost:3000/api/picture", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (responseCreate.status === 201) {
-        Swal.fire({
-          title: 'Téléchargée',
-          text: 'Téléchargement réussie',
-          icon: 'success',
-        })
-        setTimeout(() => {
-          navigate("/user/user-photos")
-        }, 3000);
+        console.log("Téléchargement réussi");
+        setImage(null);
+        setDescription("");
       } else {
-        Swal.fire({
-          title: 'Erreur!',
-          text: 'Une erreur est survenue lors du téléchargement, contenue déjà présent',
-          icon: 'error',
-        });
+        const errorText = await responseCreate.text();
+        console.error("Erreur lors de l'envoi de l'image :", errorText);
       }
     } catch (error) {
-      Swal.fire({
-        title: 'Erreur!',
-        text: 'Erreur serveur, veuillez réessayer plus tard',
-        icon: 'error',
-      });
+      console.error("Erreur lors de l'envoi de la demande :", error);
     }
   };
 
   return (
-    <form className="upload-form blur" onSubmit={handleSubmit}>
-      <h3>Uploader une photo</h3>
-      <div className="upload-input flex">
-        <input
-          type="file"
-          id="file"
-          name="file"
-          onChange={handleImageChange}
-          accept="image/*"
-        />
+    <section className="bg-upload">
+      <div className="main-container upload-section flex-column-start">
+        <h2>Uploader une photo</h2>{" "}
+        <form
+          className="upload-form form flex-column-start"
+          onSubmit={handleSubmit}
+        >
+          <div className="form-element flex-column-start">
+            <input
+              type="file"
+              id="file"
+              name="file"
+              onChange={handleImageChange}
+              accept="image/*"
+            />
+          </div>
+          <div className="form-element flex-column-start">
+            <label htmlFor="description">Description</label>
+            <textarea
+              type="text"
+              id="description"
+              className=""
+              name="description"
+              cols="25"
+              rows="4"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <input type="submit" className="submit-btn btn btn-alt" />
+        </form>
       </div>
-      <div>
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-      <input type="submit" className="submit-btn" />
-    </form>
+    </section>
   );
 };
 

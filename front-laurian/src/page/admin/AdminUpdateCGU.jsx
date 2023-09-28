@@ -1,48 +1,82 @@
+import { useState, useEffect } from "react";
 import AdminHeader from "../../components/admin/AdminHeader";
 import Footer from "../../components/public/Footer";
+import Swal from 'sweetalert2';
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 function AdminUpdateCGU() {
+
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+
+  const fetchCGU = async () => {
+    const response = await fetch(`http://localhost:3000/api/CGU`);
+    const responseJs = await response.json();
+
+    const contentState = convertFromRaw(JSON.parse(responseJs.data.text));
+    setEditorState(EditorState.createWithContent(contentState));
+  };
 
   const handleSubmitForm = async (event) => {
     event.preventDefault();
 
-    const message = event.target.text.value;
+    const contentState = editorState.getCurrentContent();
+    const rawContentState = convertToRaw(contentState);
+    const messageText = JSON.stringify(rawContentState);
 
-    const messageText = {
-      text: message,
-    };
+    Swal.fire({
+      title: 'Êtes-vous sûr de vouloir publier ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Publier',
+      cancelButtonText: 'Annuler',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch("http://localhost:3000/api/CGU", {
+          method: "PUT",
+          body: JSON.stringify({ text: messageText }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          // .then((response) => response.json())
+          .then(() => {
+            Swal.fire('Publié !', 'Vos CGU ont été publiées avec succès.', 'success');
+          })
+          .catch((error) => {
+            console.error("Une erreur s'est produite :", error);
+          });
+      }
+    });
+  };
 
-    fetch("http://localhost:3000/api/CGU", {
-      method: "POST",
-      body: JSON.stringify(messageText),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Une erreur s'est produite :", error);
-      });
-  }
+  useEffect(() => {
+    fetchCGU();
+  }, []);
+
   return (
     <>
       <AdminHeader />
       <section>
         <div className="div">
           <form onSubmit={handleSubmitForm}>
-            <label htmlFor="text">message</label> <br />
-            <textarea id="text" rows="10" /> <br />
+            <label htmlFor="text">Message</label> <br />
+            <Editor
+              editorState={editorState}
+              onEditorStateChange={setEditorState}
+            />
+            <br />
             <button type="submit">Publier</button>
           </form>
         </div>
-
       </section>
       <Footer />
     </>
-  )
+  );
 }
 
 export default AdminUpdateCGU;

@@ -1,10 +1,7 @@
 .dashboard-footer {
   text-align: center;
   padding: 15px;
-  background-color: $lightgrey;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
+  background: linear-gradient(rgb(247, 247, 247), $lightgrey);
 
   .homepage-link {
     display: inline-block;

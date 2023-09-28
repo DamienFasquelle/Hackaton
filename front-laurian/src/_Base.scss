@@ -3,6 +3,7 @@
 $grey: rgb(42, 42, 42);
 $lightgrey: rgb(226, 226, 226);
 $green: rgb(0, 121, 91);
+$red: rgb(230, 85, 85);
 
 // FONTS
 
@@ -115,6 +116,10 @@ a {
   margin-bottom: 10vh;
 }
 
+.dashboard-main {
+  min-height: 85vh;
+}
+
 // TITLES
 
 h2 {
@@ -136,7 +141,8 @@ form {
   border-radius: 10px;
   gap: 20px;
 
-  input {
+  input,
+  textarea {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid $lightgrey;
@@ -147,4 +153,39 @@ form {
     color: white;
     background-color: $green;
   }
+}
+
+// MODAL
+
+/* Style pour la modale */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  padding: 50px;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+
+/* Style pour l'image agrandie */
+.modal-content {
+  max-width: 80vw;
+  max-height: 80vh;
+  margin: 0 8vw 0 0;
+  border-radius: 5px;
+}
+
+/* Style pour le bouton de fermeture */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 130px;
+  box-shadow: 0 0 5px $grey;
+  cursor: pointer;
 }

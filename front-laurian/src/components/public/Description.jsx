@@ -1,9 +1,6 @@
 function Description() {
   return (
-    <section
-      className="main-container description-section homepage-section"
-      id="presentation"
-    >
+    <section className="main-container description-section homepage-section">
       <h2>présentation du concours</h2>
       <div className="img-container">
         <img src="/images/presentation-img.png" alt="image-presentation" />
