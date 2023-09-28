@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import UserHeader from "../../components/user/UserHeader";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
+import Swal from "sweetalert2";
 
 function UserUpdate() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
 
   const jwt = Cookies.get("jwt");
   const user = jwtDecode(jwt);
@@ -16,10 +16,15 @@ function UserUpdate() {
   const handleChangePassword = async (e) => {
     e.preventDefault();
 
-    // Vérifiez si les champs de mot de passe sont valides
     if (!currentPassword || !newPassword || !confirmPassword) {
       setErrorMessage("Tous les champs sont requis.");
       return;
+    }
+
+    if (newPassword != user.data.password) {
+
+      setErrorMessage("Mot de passe incorrect");
+      return
     }
 
     if (newPassword !== confirmPassword) {
@@ -29,7 +34,7 @@ function UserUpdate() {
 
     // Envoyer une requête au serveur pour changer le mot de passe
     try {
-      const response = await fetch(`http://localhost:3010/api/${user.data.id}`, {
+      const response = await fetch(`http://localhost:3000/api/${user.data.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -37,13 +42,18 @@ function UserUpdate() {
         },
         body: JSON.stringify({ password: newPassword }),
       });
-
+      console.log(response.status)
       if (response.status === 200) {
-        setSuccessMessage("Mot de passe changé avec succès !");
+
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
         setErrorMessage("");
+        Swal.fire(
+          "Réussis !",
+          "Mot de passe changé avec succès",
+          "success"
+        );
       } else {
         setErrorMessage("Mot de passe actuel incorrect.");
       }
@@ -60,7 +70,6 @@ function UserUpdate() {
         <div className="main-container">
           <h2>Changer le mot de passe</h2>
           {errorMessage && <div className="error-message">{errorMessage}</div>}
-          {successMessage && <div className="success-message">{successMessage}</div>}
           <form onSubmit={handleChangePassword}>
             <div className="form-element">
               <label htmlFor="currentPassword">Mot de passe actuel</label>

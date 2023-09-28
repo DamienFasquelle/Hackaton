@@ -59,25 +59,25 @@ exports.topFivePicture = (req, res) => {
     });
 };
 
-// exports.deletePicture = (req, res) => {
-//   pictureModel
-//     .findByPk(req.params.id)
-//     .then((result) => {
-//       if (!result) {
-//         res.status(404).json({ message: "Aucune photo trouvé" });
-//       } else {
-//         return result.destroy().then(() => {
-//           res.json({
-//             message: `photo supprimé : ${result.dataValues.id} `,
-//             data: result,
-//           });
-//         });
-//       }
-//     })
-//     .catch((error) => {
-//       res.status(500).json({ message: `${error}` });
-//     });
-// };
+exports.deletePicture = (req, res) => {
+  pictureModel
+    .findByPk(req.params.id)
+    .then((result) => {
+      if (!result) {
+        res.status(404).json({ message: "Aucune photo trouvé" });
+      } else {
+        return result.destroy().then(() => {
+          res.json({
+            message: `photo supprimé : ${result.dataValues.id} `,
+            data: result,
+          });
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ message: `${error}` });
+    });
+};
 exports.createPicture = async (req, res) => {
   const { description } = req.body;
   const imagePath = `${req.protocol}://${req.get("host")}/files/${
@@ -126,5 +126,34 @@ exports.updatePicture = (req, res) => {
         return res.status(400).json({ message: error.message });
       }
       res.status(500).json({ message: error.message });
+    });
+};
+exports.votePicture = (req, res) => {
+  pictureModel
+    .findByPk(req.params.id)
+    .then((result) => {
+      if (!result) {
+        res.status(404).json({ message: "L'ID ne correspond pas à l'image" });
+      } else {
+        const updatedVotes = result.dataValues.numberOfVotes + 1;
+        result
+          .update({ numberOfVotes: updatedVotes })
+          .then(() => {
+            res.json({
+              message: `Image modifiée : ${result.dataValues.id}`,
+              data: result,
+            });
+          })
+          .catch((error) => {
+            res.status(500).json({ message: error.message });
+          });
+      }
+    })
+    .catch((error) => {
+      if (error instanceof ValidationError) {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: error.message });
+      }
     });
 };

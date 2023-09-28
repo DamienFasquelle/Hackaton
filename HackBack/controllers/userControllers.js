@@ -37,30 +37,35 @@ exports.deleteUser = (req, res) => {
     });
 };
 exports.updatePassword = (req, res) => {
+  const userId = req.params.id;
+  const { actualPassword, newPassword, confirmPassword } = req.body;
+
   userModel
-    .findByPk(req.params.id)
-    .then((result) => {
-      if (!result) {
-        res.status(404).json({ message: "Aucun utilisateur trouvé" });
-      } else {
-        return bcrypt.hash(req.body.password, 10).then((hash) => {
-          const dataUser = { ...req.body, password: hash };
-          return result.update(dataUser).then(() => {
-            res.json({
-              message: `Mot de passe modifié : ${result.dataValues.id} `,
-              data: result,
+    .findByPk(userId)
+    .then((user) => {
+      if (!user) {
+        return res.sendStatus(404);
+      }
+      bcrypt.compare(actualPassword, user.password).then((isValid) => {
+        if (!isValid) {
+          return res.sendStatus(400);
+        }
+        if (newPassword !== confirmPassword) {
+          return res.sendStatus(400);
+        }
+        bcrypt.hash(newPassword, 10).then((hash) => {
+          userModel
+            .update({ password: hash }, { where: { id: userId } })
+            .then(() => {
+              res.sendStatus(200);
+            })
+            .catch(() => {
+              res.sendStatus(500);
             });
-          });
         });
-      }
+      });
     })
-    .catch((error) => {
-      if (
-        error instanceof UniqueConstraintError ||
-        error instanceof ValidationError
-      ) {
-        return res.status(400).json({ message: error.message });
-      }
-      res.status(500).json({ message: error.message });
+    .catch(() => {
+      res.sendStatus(500);
     });
 };

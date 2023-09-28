@@ -26,4 +26,6 @@ router
   .get(pictureControllers.findPictureById)
   .put(pictureControllers.updatePicture);
 
+router.route("/vote/:id").put(pictureControllers.votePicture);
+
 module.exports = router;
