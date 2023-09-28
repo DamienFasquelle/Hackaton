@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 function AdminHeader() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const isLinkActive = (linkPath) => {
+    return currentPath === linkPath ? "active" : "";
+  };
+
   const navigate = useNavigate();
 
   const handleClickDeleteCookies = () => {
@@ -25,7 +32,10 @@ function AdminHeader() {
         <nav>
           <ul className="flex-between dashboard-nav">
             <li>
-              <Link to="/admin/admin-dashboard">
+              <Link
+                to="/admin/admin-dashboard"
+                className={isLinkActive("/admin/admin-dashboard")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -38,7 +48,10 @@ function AdminHeader() {
               </Link>
             </li>
             <li>
-              <Link to="/admin/admin-validate">
+              <Link
+                to="/admin/admin-validate"
+                className={isLinkActive("/admin/admin-validate")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -51,7 +64,10 @@ function AdminHeader() {
               </Link>
             </li>
             <li>
-              <Link to="/admin/admin-updatecgu">
+              <Link
+                to="/admin/admin-updatecgu"
+                className={isLinkActive("/admin/admin-updatecgu")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"

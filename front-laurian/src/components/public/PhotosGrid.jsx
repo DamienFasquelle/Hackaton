@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ImageList, ImageListItem } from "@mui/material";
 
 function PhotosGrid() {
   const [images, setImages] = useState([]);
@@ -28,15 +29,22 @@ function PhotosGrid() {
     fetchImages();
   }, []);
 
+  // Random
+  const randomImages = [...images];
+  for (let i = randomImages.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [randomImages[i], randomImages[j]] = [randomImages[j], randomImages[i]];
+  }
+
   return (
     <section className="main-container photos-section homepage-section">
       <h2>Photographies</h2>
-      <div className="image-grid">
-        {images.map(
+      <ImageList variant="masonry" cols={3} gap={25} className="masonry">
+        {randomImages.map(
           (image, index) =>
             image.status === "publié" && (
               <>
-                <article key={index} className="image-card">
+                <ImageListItem key={index} className="image-card">
                   <img
                     src={image.link}
                     alt={image.description}
@@ -44,14 +52,18 @@ function PhotosGrid() {
                     onClick={() => openModal(image.link)}
                   />
                   <button className="vote-btn btn">Voter</button>
-                </article>
-                <div id="myModal" class="modal" onClick={() => closeModal()}>
-                  <button class="close btn" onClick={() => closeModal()}>
+                </ImageListItem>
+                <div
+                  id="myModal"
+                  className="modal"
+                  onClick={() => closeModal()}
+                >
+                  <button className="close btn" onClick={() => closeModal()}>
                     X
                   </button>
                   <img
                     id="modalImage"
-                    class="modal-content"
+                    className="modal-content"
                     src=""
                     alt="Image agrandie"
                   />
@@ -59,7 +71,7 @@ function PhotosGrid() {
               </>
             )
         )}
-      </div>
+      </ImageList>
     </section>
   );
 }

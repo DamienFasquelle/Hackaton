@@ -8,6 +8,26 @@
     color: $green;
   }
 
+  .active {
+    color: $green;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 140%;
+      height: 4px;
+      bottom: -14px;
+      transform: translateX(-50%);
+      background-color: $green;
+      border-radius: 5px 5px 0 0;
+    }
+
+    svg {
+      fill: $green;
+    }
+  }
+
   .dashboard-nav {
     gap: 10vw;
     text-align: center;
@@ -20,7 +40,7 @@
       }
 
       p {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
       }
 
       &:hover {

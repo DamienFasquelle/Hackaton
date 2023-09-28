@@ -1,7 +1,7 @@
 import Header from "../../components/public/Header";
 import Footer from "../../components/public/Footer";
 import { useEffect, useState } from "react";
-import { convertFromRaw, Editor, EditorState } from "draft-js";
+import { convertFromRaw, EditorState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 
 function CGU() {
@@ -15,7 +15,10 @@ function CGU() {
       const editorState = EditorState.createWithContent(contentState);
       setCGU(editorState);
     } catch (error) {
-      console.error("Une erreur s'est produite lors de la récupération des CGU :", error);
+      console.error(
+        "Une erreur s'est produite lors de la récupération des CGU :",
+        error
+      );
     }
   };
 

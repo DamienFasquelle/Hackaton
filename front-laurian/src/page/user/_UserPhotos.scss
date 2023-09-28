@@ -1,10 +1,9 @@
-.images-validate-section {
+.user-photos-section {
   margin-top: 50px;
   text-align: center;
   position: relative;
-  min-height: 76vh;
+  min-height: 79vh;
   overflow: hidden;
-  padding-bottom: 3vh;
 
   &::after {
     content: "";
@@ -32,10 +31,13 @@
     // grid-template-columns: repeat(3, 1fr);
     // gap: 20px;
 
-    .image-validate-card {
+    .user-photo-card {
       margin: auto;
-      width: 25vw;
-      height: 20vw;
+      width: 22vw;
+      height: auto;
+      border: 1px solid $lightgrey;
+      padding: 10px;
+      border-radius: 10px;
 
       img {
         width: 100%;
@@ -43,13 +45,14 @@
         border-radius: 5px;
         object-fit: contain;
         margin-bottom: 8px;
+        cursor: pointer;
       }
 
-      .btns-container {
-        gap: 10px;
+      .infos {
+        gap: 70px;
 
-        & > :last-child {
-          background-color: $red;
+        p {
+          text-transform: capitalize;
         }
       }
     }

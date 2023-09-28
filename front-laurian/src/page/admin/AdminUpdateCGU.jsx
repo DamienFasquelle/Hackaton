@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import AdminHeader from "../../components/admin/AdminHeader";
-import Footer from "../../components/public/Footer";
-import Swal from 'sweetalert2';
+import UserFooter from "../../components/user/UserFooter";
+import Swal from "sweetalert2";
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 function AdminUpdateCGU() {
-
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-
 
   const fetchCGU = async () => {
     const response = await fetch(`http://localhost:3000/api/CGU`);
@@ -27,13 +25,13 @@ function AdminUpdateCGU() {
     const messageText = JSON.stringify(rawContentState);
 
     Swal.fire({
-      title: 'Êtes-vous sûr de vouloir publier ?',
-      icon: 'warning',
+      title: "Êtes-vous sûr de vouloir publier ?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Publier',
-      cancelButtonText: 'Annuler',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Publier",
+      cancelButtonText: "Annuler",
     }).then((result) => {
       if (result.isConfirmed) {
         fetch("http://localhost:3000/api/CGU", {
@@ -45,7 +43,11 @@ function AdminUpdateCGU() {
         })
           // .then((response) => response.json())
           .then(() => {
-            Swal.fire('Publié !', 'Vos CGU ont été publiées avec succès.', 'success');
+            Swal.fire(
+              "Publié !",
+              "Vos CGU ont été publiées avec succès.",
+              "success"
+            );
           })
           .catch((error) => {
             console.error("Une erreur s'est produite :", error);
@@ -61,7 +63,8 @@ function AdminUpdateCGU() {
   return (
     <>
       <AdminHeader />
-      <section>
+      <section className="main-container">
+        <h2>Modifier les CGU</h2>
         <div className="div">
           <form onSubmit={handleSubmitForm}>
             <label htmlFor="text">Message</label> <br />
@@ -74,7 +77,7 @@ function AdminUpdateCGU() {
           </form>
         </div>
       </section>
-      <Footer />
+      <UserFooter />
     </>
   );
 }

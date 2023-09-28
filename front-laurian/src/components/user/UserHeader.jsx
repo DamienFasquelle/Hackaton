@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 function UserHeader() {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const isLinkActive = (linkPath) => {
+    return currentPath === linkPath ? "active" : "";
+  };
+
   const navigate = useNavigate();
 
   const handleClickDeleteCookies = () => {
@@ -13,6 +20,7 @@ function UserHeader() {
 
   const jwt = Cookies.get("jwt");
   const userData = jwtDecode(jwt);
+
   return (
     <>
       <header className="dashboard-header flex-between">
@@ -25,7 +33,10 @@ function UserHeader() {
         <nav>
           <ul className="flex-between dashboard-nav">
             <li>
-              <Link>
+              <Link
+                to="/user/user-upload"
+                className={isLinkActive("/user/user-upload")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -38,7 +49,10 @@ function UserHeader() {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link
+                to="/user/user-photos"
+                className={isLinkActive("/user/user-photos")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"
@@ -51,7 +65,10 @@ function UserHeader() {
               </Link>
             </li>
             <li>
-              <Link>
+              <Link
+                to="/user/user-update"
+                className={isLinkActive("/user/user-update")}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="24"

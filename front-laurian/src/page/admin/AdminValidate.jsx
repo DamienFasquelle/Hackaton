@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AdminHeader from "../../components/admin/AdminHeader";
 import Swal from "sweetalert2";
 import UserFooter from "../../components/user/UserFooter";
+import { ImageList, ImageListItem } from "@mui/material";
 
 const AdminValidatePhoto = () => {
   const [images, setImages] = useState([]);
@@ -122,7 +123,7 @@ const AdminValidatePhoto = () => {
       <AdminHeader />
       <section className="images-validate-section main-container">
         <h2>Photos en attente de validation</h2>
-        <div className="images-validate-grid">
+        <ImageList variant="masonry" cols={3} gap={25} className="masonry">
           {imagesNonPubliees.length === 0 ? (
             <div className="validate-nul-msg">
               <p>Aucune image en attente de validation</p>
@@ -130,7 +131,7 @@ const AdminValidatePhoto = () => {
           ) : (
             imagesNonPubliees.map((image) => (
               <>
-                <article key={image.id} className="image-validate-card">
+                <ImageListItem key={image.id} className="image-validate-card">
                   <img
                     src={image.link}
                     alt={image.description}
@@ -150,7 +151,7 @@ const AdminValidatePhoto = () => {
                       Rejeter
                     </button>
                   </div>
-                </article>
+                </ImageListItem>
                 <div id="myModal" class="modal" onClick={() => closeModal()}>
                   <button class="close btn" onClick={() => closeModal()}>
                     X
@@ -165,7 +166,7 @@ const AdminValidatePhoto = () => {
               </>
             ))
           )}
-        </div>
+        </ImageList>
       </section>
       <UserFooter />
     </>

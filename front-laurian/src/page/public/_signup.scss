@@ -37,6 +37,39 @@
         margin-right: 10px;
       }
 
+      .password-input-wrap {
+        align-items: end;
+
+        input {
+          border-radius: 5px 0 0 5px;
+        }
+
+        button {
+          background-color: white;
+          border: 1px solid $lightgrey;
+          border-left: none;
+          height: 38.5px;
+          padding: 0 14px;
+          border-radius: 0 5px 5px 0;
+          cursor: pointer;
+          transition: all 0.2s;
+          display: inline-block;
+
+          svg {
+            margin-top: 4px;
+            fill: $green;
+          }
+
+          &:hover {
+            background-color: $lightgrey;
+
+            svg {
+              fill: $grey;
+            }
+          }
+        }
+      }
+
       & > :first-child {
         gap: 10px;
       }
