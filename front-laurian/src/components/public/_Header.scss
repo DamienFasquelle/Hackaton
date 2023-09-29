@@ -33,16 +33,16 @@
 }
 
 @media screen and (max-width: 670px) {
-  .main-header,
-  .flex-between,
-  ul {
+  .public-header,
+  .public-header .flex-between,
+  .public-header ul {
     flex-direction: column;
     gap: 15px !important;
     justify-content: start;
     text-align: center;
   }
 
-  .main-header {
+  .public-header {
     ul {
       & > li {
         width: 200px;

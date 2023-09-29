@@ -27,7 +27,7 @@ function UserHeader() {
         <div className="welcome">
           <p>
             Bienvenue
-            {/* <span>{`${"userData.data.name"}`}</span> */}
+            {/* <span>{`${userData.data.email}`}</span> */}
           </p>
         </div>
         <nav>

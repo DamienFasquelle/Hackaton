@@ -87,13 +87,12 @@ const AdminValidatePhoto = () => {
       );
       if (responseApi.ok) {
         Swal.fire({
-          title: "Valider",
-          text: "image rejeté",
+          title: "Image rejetée",
           icon: "success",
         });
         setTimeout(() => {
           window.location.reload();
-        }, 3000);
+        }, 2000);
       } else {
         Swal.fire({
           title: "Erreur!",

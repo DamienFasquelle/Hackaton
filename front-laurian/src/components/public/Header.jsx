@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="main-header">
+    <header className="main-header public-header">
       <div className="main-container flex-between">
         <Link to="/">
           <div className="flex-center title-wrap">

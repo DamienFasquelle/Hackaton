@@ -80,6 +80,9 @@ exports.deletePicture = (req, res) => {
 };
 exports.createPicture = async (req, res) => {
   const { description } = req.body;
+  if (!req.file) {
+    return res.status(400).json({ message: "Aucun fichier n'a été envoyé." });
+  }
   const imagePath = `${req.protocol}://${req.get("host")}/files/${
     req.file.filename
   }`;

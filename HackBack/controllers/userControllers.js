@@ -39,33 +39,38 @@ exports.deleteUser = (req, res) => {
 exports.updatePassword = (req, res) => {
   const userId = req.params.id;
   const { actualPassword, newPassword, confirmPassword } = req.body;
-
   userModel
     .findByPk(userId)
     .then((user) => {
       if (!user) {
-        return res.sendStatus(404);
+        return res.status(404).json({ message: "Utilisateur non trouvé" });
       }
       bcrypt.compare(actualPassword, user.password).then((isValid) => {
         if (!isValid) {
-          return res.sendStatus(400);
+          return res
+            .status(400)
+            .json({ message: "Mauvais mot de passe actuel" });
         }
         if (newPassword !== confirmPassword) {
-          return res.sendStatus(400);
+          return res
+            .status(400)
+            .json({
+              message: "Les nouveaux mots de passe ne correspondent pas",
+            });
         }
         bcrypt.hash(newPassword, 10).then((hash) => {
           userModel
             .update({ password: hash }, { where: { id: userId } })
             .then(() => {
-              res.sendStatus(200);
+              res.status(200).json({ message: "Mot de passe changé" });
             })
-            .catch(() => {
-              res.sendStatus(500);
+            .catch((error) => {
+              res.status(500).json({ message: error.message });
             });
         });
       });
     })
     .catch(() => {
-      res.sendStatus(500);
+      res.status(500).json({ message: "Erreur serveur" });
     });
 };

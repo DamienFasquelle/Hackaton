@@ -31,8 +31,15 @@
 
       input,
       textarea {
-        width: 400px;
+        // width: 400px;
         margin-top: 10px;
+      }
+
+      textarea {
+        max-width: 500px;
+        max-height: 150px;
+        min-height: 80px;
+        min-width: 300px;
       }
 
       #file {
@@ -62,6 +69,14 @@
       & > :first-child {
         margin-bottom: 20px;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 565) {
+  .upload-section {
+    form {
+      padding: 5px !important;
     }
   }
 }

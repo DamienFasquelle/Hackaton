@@ -63,17 +63,18 @@ function AdminUpdateCGU() {
   return (
     <>
       <AdminHeader />
-      <section className="main-container">
+      <section className="main-container update-cgu-section">
         <h2>Modifier les CGU</h2>
         <div className="div">
           <form onSubmit={handleSubmitForm}>
-            <label htmlFor="text">Message</label> <br />
             <Editor
               editorState={editorState}
               onEditorStateChange={setEditorState}
             />
             <br />
-            <button type="submit">Publier</button>
+            <button type="submit" className="btn btn-alt">
+              Publier
+            </button>
           </form>
         </div>
       </section>

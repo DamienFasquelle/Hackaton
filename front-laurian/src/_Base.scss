@@ -56,6 +56,10 @@ a {
   font-family: "Montserrat Bold";
 }
 
+strong {
+  font-family: "Montserrat Bold";
+}
+
 // FLEX
 
 .flex-between {
@@ -179,6 +183,7 @@ form {
   max-height: 80vh;
   margin: 0 8vw 0 0;
   border-radius: 5px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.655);
 }
 
 /* Style pour le bouton de fermeture */

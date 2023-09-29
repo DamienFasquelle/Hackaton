@@ -4,6 +4,7 @@
   position: relative;
   min-height: 79vh;
   overflow: hidden;
+  padding-bottom: 5vh;
 
   &::after {
     content: "";
@@ -27,15 +28,17 @@
   }
 
   .masonry {
+    padding: 20px 20px;
     // display: grid;
     // grid-template-columns: repeat(3, 1fr);
     // gap: 20px;
 
     .user-photo-card {
       margin: auto;
-      width: 22vw;
+      width: auto;
       height: auto;
-      border: 1px solid $lightgrey;
+      // border: 1px solid $lightgrey;
+      box-shadow: 0 0 10px $lightgrey;
       padding: 10px;
       border-radius: 10px;
 
@@ -49,7 +52,7 @@
       }
 
       .infos {
-        gap: 70px;
+        gap: 5vw;
 
         p {
           text-transform: capitalize;

@@ -32,8 +32,11 @@ function CGU() {
   return (
     <>
       <Header />
-      <section className="CGU">
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+      <section className="CGU main-container cgu-section">
+        <h2>Conditions Générales d'utilisation</h2>
+        <div className="cgu-wrap">
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+        </div>
       </section>
       <Footer />
     </>

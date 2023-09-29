@@ -45,7 +45,7 @@ exports.login = (req, res) => {
               },
             },
             SECRET_KEY,
-            { expiresIn: 60 * 60 }
+            { expiresIn: 60 * 60 * 24 }
           );
 
           res.status(201).json({ message: "login réussi", data: token });

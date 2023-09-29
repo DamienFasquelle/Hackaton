@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
 
 function UserUpdate() {
-  const [currentPassword, setCurrentPassword] = useState("");
+  const [actualPassword, setactualPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,51 +15,49 @@ function UserUpdate() {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
+    // setErrorMessage("")
 
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      setErrorMessage("Tous les champs sont requis.");
-      return;
-    }
+    // if (!actualPassword || !newPassword || !confirmPassword) {
+    //   setErrorMessage("Tous les champs sont requis.");
+    //   return;
+    // }
 
-    if (newPassword != user.data.password) {
+    // if (newPassword != user.data.password) {
+    //   setErrorMessage("Mot de passe incorrect");
+    //   return
+    // }
 
-      setErrorMessage("Mot de passe incorrect");
-      return
-    }
+    // if (newPassword !== confirmPassword) {
+    //   setErrorMessage("Les nouveaux mots de passe ne correspondent pas.");
+    //   return;
+    // }
 
-    if (newPassword !== confirmPassword) {
-      setErrorMessage("Les nouveaux mots de passe ne correspondent pas.");
-      return;
-    }
-
-    // Envoyer une requête au serveur pour changer le mot de passe
     try {
-      const response = await fetch(`http://localhost:3000/api/${user.data.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("jwt")}`,
-        },
-        body: JSON.stringify({ password: newPassword }),
-      });
-      console.log(response.status)
+      const response = await fetch(
+        `http://localhost:3000/api/${user.data.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${Cookies.get("jwt")}`,
+          },
+          body: JSON.stringify({
+            actualPassword: actualPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword,
+          }),
+        }
+      );
       if (response.status === 200) {
-
-        setCurrentPassword("");
-        setNewPassword("");
-        setConfirmPassword("");
-        setErrorMessage("");
-        Swal.fire(
-          "Réussis !",
-          "Mot de passe changé avec succès",
-          "success"
-        );
+        Swal.fire("Réussis !", "Mot de passe changé avec succès", "success");
       } else {
         setErrorMessage("Mot de passe actuel incorrect.");
       }
     } catch (error) {
       console.error("Erreur lors du changement de mot de passe :", error);
-      setErrorMessage("Une erreur s'est produite lors du changement de mot de passe.");
+      setErrorMessage(
+        "Une erreur s'est produite lors du changement de mot de passe."
+      );
     }
   };
 
@@ -72,27 +70,29 @@ function UserUpdate() {
           {errorMessage && <div className="error-message">{errorMessage}</div>}
           <form onSubmit={handleChangePassword}>
             <div className="form-element">
-              <label htmlFor="currentPassword">Mot de passe actuel</label>
+              <label htmlFor="actualPassword">Mot de passe actuel</label>
               <input
-                type="password"
-                name="currentPassword"
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
+                type="text"
+                name="actualPassword"
+                value={actualPassword}
+                onChange={(e) => setactualPassword(e.target.value)}
               />
             </div>
             <div className="form-element">
               <label htmlFor="newPassword">Nouveau mot de passe</label>
               <input
-                type="password"
+                type="text"
                 name="newPassword"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
             </div>
             <div className="form-element">
-              <label htmlFor="confirmPassword">Confirmer le nouveau mot de passe</label>
+              <label htmlFor="confirmPassword">
+                Confirmer le nouveau mot de passe
+              </label>
               <input
-                type="password"
+                type="text"
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

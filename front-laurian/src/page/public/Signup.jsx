@@ -20,11 +20,13 @@ function Signup() {
     const lastname = event.target.lastname.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const confirmPassword = event.target.confirmPassword.value;
 
     const passwordRegexLowercase = /[a-z]/;
     const passwordRegexUppercase = /[A-Z]/;
     const passwordRegexDigit = /[0-9]/;
     const passwordRegexSymbol = /[!@#$%^&*.+-]/;
+
 
     const isPasswordValid =
       password.match(passwordRegexLowercase) &&
@@ -37,6 +39,14 @@ function Signup() {
       Swal.fire({
         title: "Erreur!",
         text: "Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un symbole et doit avoir une longueur minimale de 8 caractères.",
+        icon: "error",
+      });
+      return;
+    }
+    if (password !== confirmPassword) {
+      Swal.fire({
+        title: "Erreur!",
+        text: "Le mot de passe et la confirmation de mot de passe ne correspondent pas.",
         icon: "error",
       });
       return;
@@ -97,7 +107,7 @@ function Signup() {
               </label>
               <input id="email-input" type="email" name="email" required />
             </div>
-            <div className="flex-center password-input-wrap">
+            <div className="flex-center">
               <div className="form-element flex-column-start">
                 <label htmlFor="password">
                   Mot de passe<span>*</span>
@@ -105,6 +115,18 @@ function Signup() {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
+                  required
+                />
+              </div>
+            </div>
+            <div className="flex-center password-input-wrap">
+              <div className="form-element flex-column-start">
+                <label htmlFor="confirmPassword">
+                  Confirmation du mot de passe<span>*</span>
+                </label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="confirmPassword"
                   required
                 />
               </div>
@@ -127,7 +149,7 @@ function Signup() {
                     xmlns="http://www.w3.org/2000/svg"
                     height="24"
                     viewBox="0 -960 960 960"
-                    width="24"
+                    width="28"
                   >
                     <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
                   </svg>

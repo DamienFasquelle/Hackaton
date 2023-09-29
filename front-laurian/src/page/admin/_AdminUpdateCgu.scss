@@ -1,0 +1,74 @@
+.update-cgu-section {
+  margin-top: 50px;
+  text-align: center;
+  position: relative;
+  min-height: 76vh;
+  overflow: hidden;
+  padding: 0 3vh 3vh;
+
+  &::after {
+    content: "";
+    height: 1px;
+    width: 1200px;
+    background-color: $lightgrey;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    z-index: 1;
+  }
+
+  form {
+    margin-top: 0;
+    border-radius: 15px;
+    padding: 0 0 20px;
+
+    .rdw-editor-toolbar {
+      background-color: $green;
+      border-radius: 14px 14px 0 0;
+      border: 1px solid $green;
+      height: 50px;
+      padding-left: 10px;
+    }
+
+    .DraftEditor-editorContainer {
+      border-bottom: 1px solid $lightgrey;
+    }
+
+    .public-DraftStyleDefault-block {
+      padding: 0 20px;
+
+      span {
+        font-family: "Arial" !important;
+      }
+    }
+
+    span {
+      font-family: "Montserrat Light";
+    }
+  }
+
+  .rdw-block-wrapper,
+  .rdw-fontsize-wrapper,
+  .rdw-dropdown-selectedtext,
+  .rdw-dropdown-wrapper,
+  .rdw-list-wrapper,
+  .rdw-text-align-wrapper,
+  .rdw-colorpicker-wrapper,
+  .rdw-embedded-wrapper,
+  .rdw-emoji-wrapper,
+  .rdw-image-wrapper {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 615px) {
+  .rdw-editor-toolbar {
+    height: 100px !important;
+  }
+}
+
+@media screen and (max-width: 386px) {
+  .rdw-editor-toolbar {
+    height: 150px !important;
+  }
+}

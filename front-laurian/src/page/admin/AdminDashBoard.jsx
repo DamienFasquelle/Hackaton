@@ -1,11 +1,36 @@
-import { Link } from "react-router-dom";
 import AdminHeader from "../../components/admin/AdminHeader";
 import UserFooter from "../../components/user/UserFooter";
 import AdminNotification from "../../components/admin/AdminNotification";
 import AdminTop5 from "../../components/admin/AdminTop5";
-import AdminShowPhotos from "../../components/admin/AdminShowPhotos";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 function AdminDashboard() {
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+
+    const jwt = Cookies.get("jwt");
+
+    if (!jwt) {
+      navigate("/");
+    } else {
+      try {
+        const user = jwtDecode(jwt);
+        if (user.data.id !== 1) {
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Erreur lors du décodage du jeton JWT :", error);
+        navigate("/");
+      }
+    }
+  })
+
+
   return (
     <>
       <AdminHeader />

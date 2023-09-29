@@ -68,4 +68,12 @@
       }
     }
   }
+
+  .active {
+    &::after {
+      width: 100%;
+      left: 50%;
+      bottom: -16px !important;
+    }
+  }
 }
