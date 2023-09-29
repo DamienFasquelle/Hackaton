@@ -15,22 +15,54 @@ function UserUpdate() {
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
-    // setErrorMessage("")
 
-    // if (!actualPassword || !newPassword || !confirmPassword) {
-    //   setErrorMessage("Tous les champs sont requis.");
-    //   return;
-    // }
+    if (!actualPassword || !newPassword || !confirmPassword) {
+      Swal.fire({
+        title: "Erreur!",
+        text: "Tout les champs sont requis",
+        icon: "error",
+      });
+      return;
+    }
 
-    // if (newPassword != user.data.password) {
-    //   setErrorMessage("Mot de passe incorrect");
-    //   return
-    // }
+    if (actualPassword != user.data.password) {
+      Swal.fire({
+        title: "Erreur!",
+        text: "Mot de passe incorrect",
+        icon: "error",
+      });
+      return
+    }
+    const passwordRegexLowercase = /[a-z]/;
+    const passwordRegexUppercase = /[A-Z]/;
+    const passwordRegexDigit = /[0-9]/;
+    const passwordRegexSymbol = /[!@#$%^&*.+-]/;
 
-    // if (newPassword !== confirmPassword) {
-    //   setErrorMessage("Les nouveaux mots de passe ne correspondent pas.");
-    //   return;
-    // }
+
+    const isPasswordValid =
+      newPassword.match(passwordRegexLowercase) &&
+      newPassword.match(passwordRegexUppercase) &&
+      newPassword.match(passwordRegexDigit) &&
+      newPassword.match(passwordRegexSymbol) &&
+      newPassword.length >= 8;
+
+    if (!isPasswordValid) {
+      Swal.fire({
+        title: "Erreur!",
+        text: "Le nouveau mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre, un symbole et doit avoir une longueur minimale de 8 caractères.",
+        icon: "error",
+      });
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      Swal.fire({
+        title: "Erreur!",
+        text: "Les nouveaux mot de passe ne correspondent pas",
+        icon: "error",
+      });
+      return;
+    }
 
     try {
       const response = await fetch(

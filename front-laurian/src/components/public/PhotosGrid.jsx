@@ -74,7 +74,6 @@ function PhotosGrid() {
     }
   };
 
-
   useEffect(() => {
     fetchImages();
 
