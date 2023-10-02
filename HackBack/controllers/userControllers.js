@@ -52,11 +52,9 @@ exports.updatePassword = (req, res) => {
             .json({ message: "Mauvais mot de passe actuel" });
         }
         if (newPassword !== confirmPassword) {
-          return res
-            .status(400)
-            .json({
-              message: "Les nouveaux mots de passe ne correspondent pas",
-            });
+          return res.status(400).json({
+            message: "Les nouveaux mots de passe ne correspondent pas",
+          });
         }
         bcrypt.hash(newPassword, 10).then((hash) => {
           userModel
@@ -72,5 +70,35 @@ exports.updatePassword = (req, res) => {
     })
     .catch(() => {
       res.status(500).json({ message: "Erreur serveur" });
+    });
+};
+
+exports.findUserById = (req, res) => {
+  userModel
+    .findOne({
+      where: { id: req.params.id },
+    })
+    .then((result) => {
+      if (!result) {
+        return res
+          .status(404)
+          .json({ message: "Aucun utilisateur trouvé avec cet ID." });
+      }
+
+      const user = {
+        id: result.id,
+        name: result.name,
+        lastname: result.lastname,
+        email: result.email,
+        password: result.password,
+      };
+
+      res.json({
+        message: "L'utilisateur a bien été récupéré.",
+        data: user,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({ message: error });
     });
 };

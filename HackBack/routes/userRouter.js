@@ -15,6 +15,7 @@ router
     authControllers.protect,
     authControllers.restrictToOwnUser(userModel),
     userControllers.updatePassword
-  );
+  )
+  .get(userControllers.findUserById);
 
 module.exports = router;

@@ -11,12 +11,15 @@ router
   //   authControllers.restrictToAdmin,
   //   CGUControllers.createCGU
   // )
-  .post(CGUControllers.createCGU)
-  // .delete(
-  //   authControllers.protect,
-  //   authControllers.restrictToAdmin,
-  // //   CGUControllers.deleteCGU
-  // )
-  .put(CGUControllers.updateCGU);
+  .post(
+    authControllers.protect,
+    authControllers.restrictToAdmin,
+    CGUControllers.createCGU
+  )
+  .put(
+    authControllers.protect,
+    authControllers.restrictToAdmin,
+    CGUControllers.updateCGU
+  );
 
 module.exports = router;

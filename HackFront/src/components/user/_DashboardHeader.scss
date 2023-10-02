@@ -1,0 +1,83 @@
+.dashboard-header {
+  padding: 15px;
+  background: linear-gradient($lightgrey, rgb(247, 247, 247));
+
+  .welcome {
+    min-width: 115px;
+  }
+
+  .homepage-link {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: $green;
+  }
+
+  .active {
+    color: $green;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 140%;
+      height: 4px;
+      bottom: -14px;
+      transform: translateX(-50%);
+      background-color: $green;
+      border-radius: 5px 5px 0 0;
+    }
+
+    svg {
+      fill: $green;
+    }
+  }
+
+  .dashboard-nav {
+    gap: 10vw;
+    text-align: center;
+
+    li {
+      svg {
+        height: 30px;
+        width: auto;
+        transition: all 0.2s ease-in-out;
+      }
+
+      p {
+        font-size: 0.75rem;
+      }
+
+      &:hover {
+        a {
+          color: $green;
+        }
+
+        svg {
+          transform: rotate(-5deg);
+          fill: $green;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .welcome {
+    display: none;
+  }
+  .dashboard-nav {
+    li {
+      p {
+        display: none;
+      }
+    }
+  }
+
+  .active {
+    &::after {
+      width: 100%;
+      left: 50%;
+      bottom: -16px !important;
+    }
+  }
+}

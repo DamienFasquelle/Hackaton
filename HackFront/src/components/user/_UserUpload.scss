@@ -1,0 +1,100 @@
+.bg-upload {
+  min-height: 85vh;
+  background: linear-gradient(
+      rgb(255, 255, 255) 10%,
+      rgba(255, 255, 255, 0.621) 40%,
+      rgb(255, 255, 255) 100%
+    ),
+    url(../../../public/images/bg_upload.jpg);
+  background-size: cover;
+  background-position: 0% 40%;
+  overflow: hidden;
+
+  .upload-section {
+    margin: 4vh auto 0;
+    position: relative;
+
+    &::after {
+      content: "";
+      height: 1px;
+      width: 1200px;
+      background-color: $lightgrey;
+      position: absolute;
+      left: 0;
+      top: 12px;
+      z-index: 1;
+    }
+
+    .upload-form {
+      margin-bottom: 5vh;
+      background-color: white;
+
+      input,
+      textarea {
+        // width: 400px;
+        margin-top: 10px;
+      }
+
+      textarea {
+        max-width: 500px;
+        max-height: 150px;
+        min-height: 80px;
+        min-width: 300px;
+      }
+
+      #file {
+        border: 1px dashed $lightgrey;
+        padding-top: 100px;
+        margin-top: -70px;
+        cursor: pointer;
+
+        &:active {
+          border-color: $green;
+        }
+      }
+
+      .file-help {
+        margin-top: 50px;
+        text-align: center;
+        color: rgb(187, 190, 196);
+      }
+
+      .dragging {
+        // border: 1px solid $green !important;
+        box-shadow: 0 0 15px rgba(0, 233, 97, 0.277);
+      }
+
+      input {
+        &::file-selector-button {
+          padding: 15px 25px;
+          font-size: 1rem;
+          border-radius: 5px;
+          border: none;
+          display: inline-block;
+          margin-right: 20px;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+
+    .signup-redirection {
+      text-align: center;
+      & > :first-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 565) {
+  .upload-section {
+    form {
+      padding: 5px !important;
+    }
+  }
+}

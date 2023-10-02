@@ -1,0 +1,320 @@
+.banner-section {
+  text-align: center;
+
+  & > :first-child {
+    height: 82vh;
+    text-align: left;
+  }
+
+  .scroller {
+    display: inline-block;
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    transition: all 0.4s ease-in-out;
+    &:hover {
+      background-color: $grey;
+
+      .scroll-indicator {
+        fill: white;
+      }
+    }
+
+    .scroll-indicator {
+      height: 30px;
+      margin-bottom: 8vh;
+      animation: move 5s ease-in-out infinite;
+      transition: all 0.4s ease-in-out;
+    }
+  }
+
+  @keyframes move {
+    0% {
+      transform: translatey(0px);
+    }
+    50% {
+      transform: translatey(20px);
+    }
+    100% {
+      transform: translatey(0px);
+    }
+  }
+
+  .title {
+    width: 500px;
+    z-index: 10;
+
+    h1 {
+      font-family: "Aboreto";
+      font-size: 3rem;
+      display: inline-block;
+
+      span {
+        font-family: "Aboreto";
+        font-size: 7.5rem;
+      }
+    }
+
+    p {
+      font-family: "Montserrat ExtraLight";
+      font-size: 1.2rem;
+      text-align: end;
+    }
+
+    > h1 + div {
+      margin-left: calc(100% - 120px);
+      gap: 5px;
+
+      img {
+        width: 120px;
+        height: auto;
+      }
+    }
+  }
+
+  // ANIMATIION
+
+  .img-container {
+    height: 538px;
+    width: 538px;
+    overflow: hidden;
+    position: relative;
+
+    & > :first-child {
+      z-index: 100 !important;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      border: 1px solid white;
+    }
+
+    .anim-imgs {
+      position: absolute;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .a1 {
+      background-color: white;
+      top: 0;
+      left: 10px;
+      width: 170px;
+      height: 177px;
+      animation: a1 10s linear infinite;
+      animation-delay: 7s;
+
+      @keyframes a1 {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+
+    .a2 {
+      background-color: $green;
+      top: 176px;
+      left: 10px;
+      width: 170px;
+      height: 135px;
+      animation: a2 10s linear infinite;
+      // animation-delay: 4s;
+
+      @keyframes a2 {
+        0% {
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+
+    .a3 {
+      background-image: url(../../../public/images/anim-img.jpg);
+      background-position: center;
+      background-size: cover;
+      top: 310px;
+      left: 10px;
+      width: 170px;
+      height: 108px;
+      animation: a2 10s linear infinite;
+      // animation-delay: 4s;
+
+      @keyframes a2 {
+        0% {
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+
+    .a4 {
+      background-color: white;
+      top: 415px;
+      left: 10px;
+      width: 170px;
+      height: 65px;
+      animation: a4 10s linear infinite;
+      animation-delay: 0;
+
+      @keyframes a4 {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+
+    .b1 {
+      background-color: white;
+      top: 0;
+      left: 180px;
+      width: 183px;
+      height: 360px;
+      opacity: 0;
+    }
+
+    .b2 {
+      background-color: brown;
+      bottom: 0;
+      left: 180px;
+      width: 180px;
+      height: 180px;
+      opacity: 0;
+    }
+
+    .c1 {
+      background-color: white;
+      top: 0;
+      right: 3px;
+      width: 178px;
+      height: 200px;
+      animation: c1 10s linear infinite;
+      animation-delay: 0;
+
+      @keyframes c1 {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+
+    .c2 {
+      background-image: url(../../../public/images/anim-img2.jpg);
+      background-position: center;
+      background-size: cover;
+      top: 200px;
+      right: 3px;
+      width: 178px;
+      height: 140px;
+      animation: c2 10s linear infinite;
+      animation-delay: 8s;
+
+      @keyframes c2 {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+
+    .c3 {
+      background-color: $green;
+      top: 340px;
+      right: 3px;
+      width: 180px;
+      height: 100px;
+      animation: c3 10s linear infinite;
+      animation-delay: 8s;
+
+      @keyframes c3 {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+
+    .c4 {
+      background-color: black;
+      top: 440px;
+      right: 3px;
+      width: 180px;
+      height: 100px;
+      opacity: 0;
+    }
+
+    .bg {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -2;
+      width: 95%;
+      height: 95%;
+    }
+  }
+}
+
+@media screen and (max-width: 1070px) {
+  .banner-section {
+    & > :first-child {
+      flex-direction: column;
+      justify-content: center;
+
+      .img-container {
+        height: 50vh;
+
+        .anim-imgs {
+          display: none;
+        }
+
+        .bg {
+          width: 400px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
