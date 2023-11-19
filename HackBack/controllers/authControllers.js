@@ -92,7 +92,7 @@ exports.restrictToOwnUser = (modelParam) => {
             if (user.RoleId === 1) {
               return next();
             }
-            if (result.id !== user.data.id) {
+            if (result.UserId !== user.id) {
               const message = "Tu n'es pas le créateur de cette ressource";
               return res.status(403).json({ message });
             }
